@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<body class="bg-[#161616] text-white font-sans min-h-screen flex flex-col items-center justify-center">
+
+    <div class="absolute top-4 right-4 font-montserrat text-lg mb-2 text-white text-xl font-bold">
+        W
+    </div>
+
+    <div class="text-center">
+        <h1 class="font-montserrat text-xl mb-2">WARDEN LINK</h1>
+        <p class="font-montserrat text-lg mb-2">First web cold crypto wallet</p>
+    </div>
+
+    <a href="/enter" class="mt-10">
+    <div class="mt-10 bg-[#1e1e1e] p-4 px-6 rounded-lg text-center w-60 shadow-md">
+        <div class="text-white font-montserrat text-lg mb-2 flex items-center justify-center gap-2">
+            <span>Existing wallet</span>
+        </div>
+        <p class="font-montserrat text-lg mb-2 text-xs text-white">
+            Enter via address<br>that was given<br>by Warden
+        </p>
+    </div>
+    </a>
+
+    <footer class="absolute bottom-4 font-montserrat text-lg mb-2 text-xs text-gray-400">
+        <a href="https://github.com/yanecoder" class="hover:underline" target="_blank">github.com/yanecoder</a>
+    </footer>
+
+</body>
+{% endblock %}

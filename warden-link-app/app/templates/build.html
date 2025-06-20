@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-screen bg-[#161616] text-white font-montserrat">
+  {% include 'sidebar.html' %}
+
+  <div class="flex-1 p-8">
+    {% include 'nav.html' %}
+
+    <h1 class="text-2xl font-bold mb-6 text-center">Build</h1>
+
+    <form method="POST" action="/build_transaction" class="max-w-sm mx-auto flex flex-col gap-4">
+      <input type="text" name="address" placeholder="Address"
+             class="bg-[#2a2a2a] px-4 py-2 rounded text-white placeholder-gray-400 w-full text-center focus:outline-none" />
+
+      <input type="text" name="amount" id="amountInput" placeholder="Amount"
+             class="bg-[#2a2a2a] px-4 py-2 rounded text-white placeholder-gray-400 w-full text-center focus:outline-none" />
+
+      <div class="text-xs text-gray-400 text-center mt-1 cursor-pointer select-none"
+           id="maxAmountText">
+        max: <span class="balance" data-true-balance="{{ max_amount }}">{{ max_amount }}</span>
+      </div>
+
+      <input type="text" name="dt" placeholder="Destination tag (if exists)"
+             class="bg-[#2a2a2a] px-4 py-2 rounded text-white placeholder-gray-400 w-full text-center focus:outline-none" />
+
+      <p class="text-yellow-400 text-xs text-center">
+        ⚠️ Funds will not be delivered without Destination tag <br>if required
+      </p>
+
+      <div class="text-center text-sm text-gray-400">
+        Transaction will be saved at<br>
+        {{ output_path }}
+      </div>
+
+      <button type="submit" class="mt-4 bg-[#2a2a2a] hover:bg-[#3a3a3a] px-6 py-2 rounded-md font-semibold transition">
+        BUILD
+      </button>
+    </form>
+  </div>
+</div>
+
+{% include 'settings.html' %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const maxAmountText = document.getElementById('maxAmountText');
+    const amountInput = document.getElementById('amountInput');
+    if (maxAmountText && amountInput) {
+      maxAmountText.addEventListener('click', () => {
+        amountInput.value = "{{ max_amount }}";
+      });
+    }
+
+    let visible = localStorage.getItem('balanceVisible') !== 'false';
+
+    function applyBalanceVisibility() {
+      const balances = document.querySelectorAll('.balance');
+      balances.forEach(el => {
+        const trueVal = el.dataset.trueBalance;
+        el.textContent = visible ? trueVal : '##.##';
+      });
+    }
+
+    window.toggleBalance = () => {
+      visible = !visible;
+      localStorage.setItem('balanceVisible', visible);
+      applyBalanceVisibility();
+    };
+
+    applyBalanceVisibility();
+  });
+</script>
+
+{% endblock %}

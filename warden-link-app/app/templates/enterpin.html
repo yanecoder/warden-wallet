@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-[#161616] text-white min-h-screen flex flex-col items-center justify-center font-montserrat">
+    <div class="text-center">
+        <p class="text-xl font-bold tracking-wide">Enter pincode</p>
+
+
+        <form action="/enterpin" method="post" class="mt-4 flex flex-col items-center">
+            <input type="text" name="pincode" placeholder="1234" pattern="\d{4}" maxlength="4" class="bg-[#2a2a2a] px-4 py-2 rounded-md text-white placeholder-gray-400 w-32 text-center focus:outline-none" required>
+            <button type="submit" class="mt-6 bg-[#2a2a2a] hover:bg-[#3a3a3a] px-6 py-2 rounded-md font-semibold transition">
+                enter
+            </button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

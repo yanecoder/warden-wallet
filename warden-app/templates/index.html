@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body class="bg-[#161616] text-white font-sans min-h-screen flex flex-col items-center justify-center">
+    {% include 'nav.html' %}
+
+    <div class="text-center mb-2">
+        <h1 class="font-montserrat text-xl mb-2">WARDEN</h1>
+    </div>
+    <p class="text-yellow-400 text-xs text-center mb-4">
+        ⚠️ Please create wallet only on secure machine<br>(no Internet connection / USB storage)
+    </p>
+    <div class="grid grid-cols-2 gap-8 mt-2">
+        <a href="/sign">
+            <div class="bg-[#1e1e1e] p-4 px-6 rounded-lg text-center w-60 shadow-md">
+                <div class="text-white font-montserrat text-lg mb-2 flex items-center justify-center gap-2">
+                    <span>Sign transaction</span>
+                </div>
+                <p class="font-montserrat text-lg mb-2 text-xs text-white">
+                    Sign JSON<br>transaction
+                </p>
+            </div>
+        </a>
+
+        <a href="/create">
+            <div class="bg-[#1e1e1e] p-4 px-6 rounded-lg text-center w-60 shadow-md">
+                <div class="text-white font-montserrat text-lg mb-2 flex items-center justify-center gap-2">
+                    <span>Create wallet</span>
+                </div>
+                <p class="font-montserrat text-lg mb-2 text-xs text-white">
+                    Create new <br>wallet
+                </p>
+            </div>
+        </a>
+
+        <a href="/reset">
+            <div class="bg-[#1e1e1e] p-4 px-6 rounded-lg text-center w-60 shadow-md">
+                <div class="text-white font-montserrat text-lg mb-2 flex items-center justify-center gap-2">
+                    <span>Reset wallet</span>
+                </div>
+                <p class="font-montserrat text-lg mb-2 text-xs text-white">
+                    Reset saved<br>wallet
+                </p>
+            </div>
+        </a>
+
+        <a href="/enter">
+            <div class="bg-[#1e1e1e] p-4 px-6 rounded-lg text-center w-60 shadow-md">
+                <div class="text-white font-montserrat text-lg mb-2 flex items-center justify-center gap-2">
+                    <span>Export wallet</span>
+                </div>
+                <p class="font-montserrat text-lg mb-2 text-xs text-white">
+                    Set wallet<br>to sign
+                </p>
+            </div>
+        </a>
+    </div>
+
+    <footer class="absolute bottom-4 font-montserrat text-lg mb-2 text-xs text-gray-400">
+        <a href="https://github.com/yanecoder" class="hover:underline" target="_blank">github.com/yanecoder</a>
+    </footer>
+
+</body>
+{% include "settings.html" %}
+{% endblock %}

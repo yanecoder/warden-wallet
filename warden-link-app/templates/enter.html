@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-[#161616] text-white min-h-screen flex flex-col items-center justify-center font-montserrat">
+    <div class="text-center">
+        <h1 class="text-xl font-bold tracking-wide">WARDEN LINK</h1>
+        <p class="text-base mt-8">Using guide</p>
+
+        <p class="mt-4">1. Create a wallet using Warden.</p>
+        <p class="mt-4">2. Enter the address provided with seed phrase</p>
+    </div>
+
+    <form action="/enter" method="post" class="mt-6 flex flex-col items-center">
+        <input type="text" name="address" placeholder="r..." class="bg-[#2a2a2a] px-4 py-2 rounded-md text-white placeholder-gray-400 w-64 text-center focus:outline-none" required>
+        <button type="submit" class="mt-4 bg-[#2a2a2a] hover:bg-[#3a3a3a] px-6 py-2 rounded-md font-semibold transition">
+            enter
+        </button>
+    </form>
+</div>
+{% endblock %}

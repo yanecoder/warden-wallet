@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-screen bg-[#161616] text-white font-montserrat">
+
+  {% include "sidebar.html" %}
+
+  <main class="flex-1 p-10 bg-[#161616]">
+    {% include "nav.html" %}
+
+    <h2 class="text-2xl font-bold mb-6">Accounts</h2>
+
+    <div class="bg-[#272727] rounded-xl p-6 flex justify-between items-center">
+      <span class="text-lg font-semibold">XRP</span>
+      <span class="text-lg font-bold" id="balance">{{ balance }}</span>
+    </div>
+  </main>
+
+</div>
+    {% include "settings.html" %}
+<script>
+  let visible = localStorage.getItem('balanceVisible') === 'false' ? false : true;
+  const trueBalance = "{{ balance }}";
+
+  function toggleBalance() {
+    const balanceEl = document.getElementById('balance');
+    
+    if (visible) {
+
+      balanceEl.textContent = '##.##'; 
+    } else {
+
+      balanceEl.textContent = `${trueBalance}`;
+    }
+    
+    visible = !visible;
+    
+
+    localStorage.setItem('balanceVisible', visible);
+  }
+
+  if (!visible) {
+    document.getElementById('balance').textContent = '##.##';
+  }
+</script>
+{% endblock %}

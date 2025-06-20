@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-screen bg-[#161616] text-white font-montserrat">
+  {% include 'sidebar.html' %}
+
+  <div class="flex-1 p-8">
+    {% include 'nav.html' %}
+
+    <h1 class="text-2xl font-bold mb-6 text-center">Send</h1>
+
+    <form method="POST" action="/send" enctype="multipart/form-data" 
+          class="max-w-sm mx-auto flex flex-col gap-4 bg-[#272727] p-6 rounded-md">
+
+      <label class="text-gray-300 text-center">Drop stx.json here:</label>
+
+      <div id="dropzone" class="relative border-2 border-dashed border-gray-500 rounded-lg py-10 px-6 text-center cursor-pointer hover:border-gray-300 transition">
+        <input id="fileInput" type="file" name="file" accept=".json"
+               class="absolute inset-0 opacity-0 cursor-pointer" required>
+        <p class="text-gray-400">Click or drop JSON file here</p>
+      </div>
+
+      <div id="fileNameDisplay" class="text-sm text-gray-400 text-center mt-2"></div>
+
+      <button type="submit" class="mt-4 bg-[#2a2a2a] hover:bg-[#3a3a3a] px-6 py-2 rounded-md font-semibold transition">
+        send
+      </button>
+    </form>
+
+    {% if success is defined %}
+      <div class="mt-6 max-w-sm mx-auto text-center text-white">
+        {% if success %}
+          <p class="text-green-400 font-semibold mb-2">Transaction sent successfully!</p>
+          <p>
+            View on
+            <a href="{{ tx_url }}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">
+              xrpscan.com
+            </a>
+          </p>
+        {% else %}
+          <p class="text-red-500 font-semibold">Error. {{ error }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% include 'settings.html' %}
+
+<script>
+  const fileInput = document.getElementById('fileInput');
+  const fileNameDisplay = document.getElementById('fileNameDisplay');
+  const dropzone = document.getElementById('dropzone');
+
+  fileInput.addEventListener('change', () => {
+    fileNameDisplay.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+  });
+
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.classList.add('border-blue-400');
+  });
+
+  dropzone.addEventListener('dragleave', () => {
+    dropzone.classList.remove('border-blue-400');
+  });
+
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('border-blue-400');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      fileInput.files = files;
+      fileNameDisplay.textContent = files[0].name;
+    }
+  });
+</script>
+{% endblock %}

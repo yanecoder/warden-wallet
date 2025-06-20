@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-[#161616] text-white font-sans min-h-screen flex flex-col items-center justify-center">
+    <a href="/"
+        class="font-montserrat absolute top-4 left-4 text-gray-400 hover:text-white transition text-sm">
+        <i class="fas fa-arrow-left mr-1"></i> Back
+    </a>
+
+    <h1 class="font-montserrat text-xl mb-4">Your new wallet</h1>
+
+    <div class="bg-[#1e1e1e] p-6 rounded-lg shadow-md max-w-xl text-center">
+        {% include 'nav.html' %}
+        <div class="flex items-center bg-[#2e2e2e] text-white p-4 rounded-md mb-4 font-mono text-sm break-words justify-between">
+            <span class="mr-2">{{ mnemonic }}</span>
+            <button onclick="copyText('{{ mnemonic }}')" class="text-gray-400 hover:text-white" title="Copy">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2"/>
+                    <rect x="3" y="3" width="13" height="13" rx="2" ry="2" stroke-width="2"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex items-center justify-center bg-[#2e2e2e] text-white p-4 rounded-md mb-4 font-mono text-sm break-words space-x-2">
+            <span>{{ address }}</span>
+            <button onclick="copyText('{{ address }}')" class="text-gray-400 hover:text-white" title="Copy">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2"/>
+                    <rect x="3" y="3" width="13" height="13" rx="2" ry="2" stroke-width="2"/>
+                </svg>
+            </button>
+        </div>
+
+        <p class="text-yellow-400 text-xs">
+            ⚠️ Save private phrase and address.
+        </p>
+    </div>
+</div>
+{% include "settings.html" %}
+<script>
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+}
+</script>
+{% endblock %}

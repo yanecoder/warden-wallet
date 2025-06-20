@@ -1,0 +1,23 @@
+<div id="settingsModal" class="fixed inset-0 bg-[#111111] bg-opacity-70 flex items-center justify-center z-50 hidden">
+  <div class="bg-[#111111] text-white w-96 p-6 rounded-lg relative">
+    <button onclick="toggleSettingsModal()" class="absolute top-2 right-3 text-white text-xl font-bold">&times;</button>
+    <h2 class="text-center text-lg font-bold mb-6">Settings</h2>
+
+    <form method="POST" action="/change_output_path" class="mb-4">
+      <label class="block text-sm mb-2" for="new_output_path">Change output path:</label>
+      <input type="text" id="new_output_path" name="new_output_path" class="w-full px-3 py-2 bg-[#222222] text-white rounded-md mb-2" placeholder="Enter new output path" required>
+      <button type="submit" class="bg-[#333333] hover:bg-[#444444] text-white py-1 px-3 rounded">Update</button>
+    </form>
+
+    <form action="{{ url_for('reset_account') }}" method="post" class="text-center mb-4">
+      <button type="submit" class="text-[#CC1E1E]">Reset account</button>
+    </form>
+
+    <div class="text-sm text-gray-400 flex justify-between mt-4 px-2">
+      <a href="https://github.com/yanecoder" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">
+        Dev: yanecoder
+      </a>
+      <span>version: beta v0.1</span>
+    </div>
+  </div>
+</div>

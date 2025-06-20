@@ -1,0 +1,11 @@
+<div class="absolute top-4 right-4 flex items-center space-x-4 text-white text-lg">
+        <button onclick="toggleSettingsModal()" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
+</div>
+<script>
+  function toggleSettingsModal() {
+    const modal = document.getElementById("settingsModal");
+    modal.classList.toggle("hidden");
+  }
+</script>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-screen bg-[#161616] text-white font-montserrat">
+  {% include 'sidebar.html' %}
+
+  <div class="flex-1 p-8">
+    {% include 'nav.html' %}
+
+    <div class="flex flex-col items-center justify-center text-white text-center mt-12 space-y-4">
+        <h2 class="text-xl font-bold">Support me</h2>
+
+        <p class="text-base max-w-md">
+            Warden is an open-source project. If you’d like to support, you can :)
+        </p>
+
+        <div class="mt-6 space-y-2 font-mono text-sm">
+        <p><strong>XRP (XRP):</strong><br>rs2dgzYeqYqsk8bvkQR5YPyqsXYcA24MP2 (MEMO: 615029)</p>
+        <p><strong>USDT (APTOS):</strong><br>0x3b179ef1e3e067dbab86e89ef870e9c699d66d4db3cd3ef5b4f89cb167bab4bd</p>
+        <p><strong>USDT (TRX):</strong><br>TEucAsY5YMG19UUT2iiTsxLyDUjSwGRFTv</p>
+        </div>
+        </div>
+    </form>
+  </div>
+</div>
+{% include "settings.html" %}
+{% endblock %}

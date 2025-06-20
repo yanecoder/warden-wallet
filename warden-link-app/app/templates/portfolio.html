@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-screen bg-[#161616] text-white font-montserrat">
+
+  {% include "sidebar.html" %}
+
+  <main class="flex-1 p-10 relative bg-[#161616]">
+    {% include "nav.html" %}
+
+    <div class="text-white mt-10">
+      <h2 class="text-sm font-semibold text-gray-300 mb-2">TOTAL BALANCE</h2>
+      <div class="flex items-center space-x-2">
+        <p id="balance" class="text-4xl font-bold">${{ balance }}</p>
+
+        <span onclick="updateBalance()" style="cursor: pointer;" title="Update Balance" class="text-lg">
+          <i id="reloadIcon" class="fas fa-sync-alt" style="font-size: 18px;"></i>
+        </span>
+      </div>
+    </div>
+  </main>
+</div>
+    {% include "settings.html" %}
+<script>
+let visible = localStorage.getItem('balanceVisible') !== 'false';
+const balanceEl = document.getElementById('balance');
+let currentBalance = balanceEl.textContent.replace('$', '');
+
+if (!visible) {
+    balanceEl.textContent = '$######';
+}
+
+function toggleBalance() {
+    if (visible) {
+        balanceEl.textContent = '$######';
+    } else {
+        balanceEl.textContent = `$${currentBalance}`;
+    }
+    visible = !visible;
+    localStorage.setItem('balanceVisible', visible);
+}
+
+function updateBalance() {
+    const reloadIcon = document.getElementById('reloadIcon');
+    reloadIcon.classList.add('rotate');
+
+    fetch("/update_balance")
+        .then(response => response.json())
+        .then(data => {
+            currentBalance = data.balance.toFixed(2);
+            if (visible) {
+                balanceEl.textContent = `$${currentBalance}`;
+            }
+            reloadIcon.classList.remove('rotate');
+        });
+}
+
+setTimeout(updateBalance, 2000);
+setInterval(updateBalance, 60000);
+</script>
+
+
+<style>
+    .rotate {
+        animation: spin 0.4s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+# Project-specific
+warden-app/electrum/node_modules/
+warden-link-app/electrum/node_modules
+user.json
+private.json
+output/
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+.env
+*.env
+
+# Flask
+instance/
+*.db
+*.sqlite3
+
+# Electrum
+user.json
+private.json
+output/
+
+# Node.js
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Tailwind
+*.css.map
+*.js.map
+*.tmp
+*.bak
+
+# Build tools
+dist/
+build/
+.cache/
+*.lock
+
+# Other
+*.log
+*.swp
+*.swo
