@@ -1,1 +1,1 @@
-# warden-wallet
+# Warden wallet
