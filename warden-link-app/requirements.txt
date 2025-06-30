@@ -1,4 +1,4 @@
 Flask
 python-dotenv
 qrcode
-xrpl
+xrpl-py

@@ -3,9 +3,12 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 let backendProcess = null;
+let win = null;
 
 function createWindow() {
-    const win = new BrowserWindow({
+    if (win) return;
+
+    win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -30,20 +33,28 @@ function createWindow() {
             shell.openExternal(url);
         }
     });
+
+    win.on('closed', () => {
+        win = null;
+    });
 }
 
 function startBackend() {
-    const exePath = path.join(__dirname, 'run.exe');
-    backendProcess = spawn(exePath, [], { cwd: __dirname });
+    const scriptPath = path.join(__dirname, '..', 'run.py');
 
-    backendProcess = spawn(exePath);
+    backendProcess = spawn('python', [scriptPath], { cwd: path.join(__dirname, '..') });
 
     backendProcess.stdout.on('data', (data) => {
-        console.log(`[Flask stdout] ${data}`);
+        const text = data.toString();
+        console.log(`[Flask stdout] ${text}`);
+
+        if (text.includes('Running on http://127.0.0.1:5000')) {
+            createWindow();
+        }
     });
 
     backendProcess.stderr.on('data', (data) => {
-        console.error(`[Flask stderr] ${data}`);
+        console.error(`[Flask stderr] ${data.toString()}`);
     });
 
     backendProcess.on('close', (code) => {
@@ -53,7 +64,16 @@ function startBackend() {
 
 app.whenReady().then(() => {
     startBackend();
-    setTimeout(createWindow, 100);
+
+    setTimeout(() => {
+        if (!win) createWindow();
+    }, 5000);
+
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow();
+        }
+    });
 });
 
 app.on('window-all-closed', () => {
@@ -62,11 +82,5 @@ app.on('window-all-closed', () => {
             backendProcess.kill();
         }
         app.quit();
-    }
-});
-
-app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
     }
 });

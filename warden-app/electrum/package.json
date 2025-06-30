@@ -1,15 +1,38 @@
 {
   "name": "warden",
   "version": "1.0.0",
+  "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.example.warden",
+    "productName": "Warden",
+    "files": [
+      "**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../python",
+        "to": "python"
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "devDependencies": {
-    "electron": "^25.9.8"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "description": ""
+    "electron": "^25.9.8",
+    "electron-builder": "^24.6.0"
+  }
 }

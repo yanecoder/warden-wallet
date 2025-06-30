@@ -1,2 +1,5 @@
 Flask
 python-dotenv
+xrpl-py
+ecdsa
+mnemonic
