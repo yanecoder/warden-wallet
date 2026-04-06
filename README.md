@@ -1,11 +1,10 @@
 # Warden wallet
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-![Warden](./github/banner.png)
 
 ## About
-First open-source software cold **non-hardware** wallet.  
+First open-source  cold **non-hardware** wallet.  
 Warden-Link allows you to generate and send signed transactions.  
-Warden can sign transactions using your private key.
+Warden is air-gapped signing solution
 
 ## Usage
 ![Warden](./github/usage.png)
@@ -17,7 +16,6 @@ Warden can sign transactions using your private key.
 ## Features
 - Secure offline transaction signing
 - Wallet based on **XRPL** network
-- Multi-platform support
 - Open-source and extensible
   
 ## Releases
